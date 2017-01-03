@@ -1,0 +1,8 @@
+$fontColor:red;
+$globalColor:blue;
+.testFont {
+    color: $fontColor
+}
+html,body{
+    color: $globalColor
+}

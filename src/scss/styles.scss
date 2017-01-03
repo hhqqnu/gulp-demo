@@ -1,0 +1,9 @@
+.testing {
+    width: percentage(5/7)
+}
+
+$bodyBackgroundColor:#ccc;
+body{
+    background-color:$bodyBackgroundColor; 
+    opacity: .5;
+}
