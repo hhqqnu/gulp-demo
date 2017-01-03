@@ -4,3 +4,7 @@
 body {
   background-color: #ccc;
   opacity: .5; }
+
+.defaultFont {
+  font-size: 60px;
+  color: #eee; }
