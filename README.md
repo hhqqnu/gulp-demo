@@ -10,3 +10,5 @@
 - gulp del
 - gulp rev
 - gulp rev-replace
+- gulp imagemin
+- gulp cache

@@ -8,7 +8,9 @@ var gulp = require('gulp'),
     del = require('del'),
     runSequence = require('run-sequence'),
     rev = require('gulp-rev'),
-    revReplace = require('gulp-rev-replace');
+    revReplace = require('gulp-rev-replace'),
+    imagemin = require('gulp-imagemin'),
+    cache = require('gulp-cache');
 
 var browserSync = require('browser-sync').create();
 
@@ -37,8 +39,18 @@ gulp.task('useref', function () {
         .pipe(gulpIf('*.js', uglify()))
         .pipe(gulpIf('*.css',rev()))
         .pipe(gulpIf('*.css', cssnano()))
-        .pipe(revReplace())
+        .pipe(revReplace({
+            replaceInExtensions:['.html']
+        }))
         .pipe(gulp.dest('dist'))
+});
+
+gulp.task('images',function(){
+    return gulp.src('src/images/**/*.+(png|jpg|jpeg|gif|svg)')
+        .pipe(cache(imagemin({
+            interlaced: true
+        })))
+        .pipe(gulp.dest('dist/images'))
 });
 
 gulp.task('clean', function () {
@@ -54,7 +66,7 @@ gulp.task('watch', ['browserSync', 'sass'], function () {
 
 
 gulp.task('build', function (callback) {
-    runSequence('clean', ['sass', 'useref'], callback);
+    runSequence('clean', ['sass', 'useref','images'], callback);
 });
 
 gulp.task('default', function (callback) {
