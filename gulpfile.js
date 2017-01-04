@@ -10,7 +10,8 @@ var gulp = require('gulp'),
     rev = require('gulp-rev'),
     revReplace = require('gulp-rev-replace'),
     imagemin = require('gulp-imagemin'),
-    cache = require('gulp-cache');
+    cache = require('gulp-cache'),
+    htmlmin = require('gulp-htmlmin');
 
 var browserSync = require('browser-sync').create();
 
@@ -34,7 +35,7 @@ gulp.task('sass', function () {
 
 gulp.task('useref', function () {
     return gulp.src('src/**/*.html')
-        .pipe(useref()) 
+        .pipe(useref())
         .pipe(gulpIf('*.js',rev()))
         .pipe(gulpIf('*.js', uglify()))
         .pipe(gulpIf('*.css',rev()))
@@ -42,6 +43,7 @@ gulp.task('useref', function () {
         .pipe(revReplace({
             replaceInExtensions:['.html']
         }))
+        .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest('dist'))
 });
 

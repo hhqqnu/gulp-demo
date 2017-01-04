@@ -12,3 +12,4 @@
 - gulp rev-replace
 - gulp imagemin
 - gulp cache
+- gulp htmlmin
